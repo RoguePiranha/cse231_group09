@@ -9,7 +9,8 @@ using namespace std;
 class Chess
 {
 private:
-	bool castle = true;
+	bool whiteCastle = true;
+	bool blackCastle = true;
 
 	/***************************************************
 	 * PAWN PROMOTION

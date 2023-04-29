@@ -319,6 +319,28 @@ bool Chess::castling(char* board, int positionFrom, int positionTo)
 		return false;
 }
 
+bool Chess::kingMoved(char* board) {
+	// Find the current position of the black and white kings
+	int blackKingPos = -1;
+	int whiteKingPos = -1;
+	for (int i = 0; i < 64; i++) {
+		if (board[i] == 'k') {
+			blackKingPos = i;
+		}
+		else if (board[i] == 'K') {
+			whiteKingPos = i;
+		}
+	}
+
+	// Check if either king has moved
+	if (blackKingPos != 4 || whiteKingPos != 60) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 bool Chess::move(char* board, int positionFrom, int positionTo)
 {
 	// do not move if a move was not indicated
@@ -334,7 +356,7 @@ bool Chess::move(char* board, int positionFrom, int positionTo)
 	if (pawnPromotion(board, positionFrom, positionTo))
 		return true;
 	// check for castling
-	else if (castle)
+	else if (whiteCastle || blackCastle)
 	{
 		if (castling(board, positionFrom, positionTo))
 			return true;
@@ -342,7 +364,6 @@ bool Chess::move(char* board, int positionFrom, int positionTo)
 	// only move there is the suggested move is on the set of possible moves
 	else if (possiblePrevious.find(positionTo) != possiblePrevious.end())
 	{
-		
 		board[positionTo] = board[positionFrom];
 		board[positionFrom] = ' ';
 		return true;
