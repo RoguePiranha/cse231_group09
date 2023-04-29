@@ -27,12 +27,18 @@
     <ClCompile Include="uiInteract.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="chessClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="uiDraw.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="uiInteract.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="point.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
