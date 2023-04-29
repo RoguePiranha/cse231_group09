@@ -356,6 +356,14 @@ bool move(char* board, int positionFrom, int positionTo)
       return true;
    }
 
+   // promotes a pawn to Queen if it has reached the other end of the board.
+   if (board[positionTo] == 'P' && (positionTo >= 0 && positionTo <= 7)) {
+       board[positionTo] == 'Q';
+   }
+   if (board[positionTo] == 'p' && (positionTo >= 49 && positionTo <= 55)) {
+       board[positionTo] == 'q';
+   }
+
    return false;
 
 }
