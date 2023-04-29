@@ -1,0 +1,3 @@
+C:\Users\jamesnh\OneDrive\OneDrive - BYU-Idaho\231\Site\Notes\Lab01\x64\Debug\Lab01.exe
+C:\Users\jamesnh\OneDrive\OneDrive - BYU-Idaho\231\Site\Notes\Lab01\x64\Debug\Lab01.pdb
+C:\Users\offic\Documents\GitHub\BYUI-Software-Engineering-Projects\CSE 231\Lab 01\x64\Debug\Lab01.exe
