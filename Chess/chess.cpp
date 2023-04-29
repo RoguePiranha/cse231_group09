@@ -362,13 +362,23 @@ bool move(char* board, int positionFrom, int positionTo)
        board[positionFrom] = ' ';
        return true;
    }
-   if (board[positionFrom] == 'p' && (positionTo >= 57 && positionTo <= 63)) {
+   else if (board[positionFrom] == 'p' && (positionTo >= 57 && positionTo <= 63)) {
        board[positionTo] == 'q';
        board[positionFrom] = ' ';
        return true;
    }
 
-   //if (positionFrom == )
+   // castling
+   if ((positionFrom == 60 && board[positionFrom] == 'K') && (positionTo == 63 || positionTo == 56))
+   {
+       if (positionTo == 63 && board[62] == ' ' && board[61] == ' ') {}
+       else if (positionTo == 56 && board[57] == ' ' && board[58] == ' ' && board[59] == ' ') {}
+   }
+   else if ((positionFrom == 4 && board[positionFrom] == 'k') && (positionTo == 7 || positionTo == 0))
+   {
+       if (positionTo == 7 && board[6] == ' ' && board[5] == ' ') {}
+       else if (positionTo == 0 && board[1] == ' ' && board[2] == ' ' && board[3] == ' ') {}
+   }
 
    return false;
 
