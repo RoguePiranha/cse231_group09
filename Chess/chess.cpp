@@ -362,13 +362,13 @@ bool move(char* board, int positionFrom, int positionTo)
        board[positionFrom] = ' ';
        return true;
    }
-   if (board[positionFrom] == 'p' && (positionTo >= 49 && positionTo <= 55)) {
+   if (board[positionFrom] == 'p' && (positionTo >= 57 && positionTo <= 63)) {
        board[positionTo] == 'q';
        board[positionFrom] = ' ';
        return true;
    }
 
-   //if ()
+   //if (positionFrom == )
 
    return false;
 
