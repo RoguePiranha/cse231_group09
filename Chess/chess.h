@@ -7,8 +7,22 @@
 #include <string>         // for STRING
 using namespace std;
 class Chess
-
 {
+private:
+	bool castle = true;
+
+	/***************************************************
+	 * PAWN PROMOTION
+	 * Checks to see if a pawn has qualified for a promotion
+	 ***************************************************/
+	bool pawnPromotion(char* board, int positionFrom, int positionTo) {}
+
+	/***************************************************
+	 * CASTLING
+	 * Checks if the conditions for castling have been met
+	 ***************************************************/
+	bool castling(char* board, int positionFrom, int positionTo) {}
+public:
 	/***********************************************
 	* Row Column
 	* Simple row/column pair
@@ -18,6 +32,7 @@ class Chess
 		int row;
 		int col;
 	};
+
 
 	/****************************************************
 	* IS NOT WHITE
@@ -56,18 +71,6 @@ class Chess
 	 * Draw the current state of the game
 	 ***************************************************/
 	void draw(const char* board, const Interface& ui, const set <int>& possible) {}
-
-	/***************************************************
-	 * PAWN PROMOTION
-	 * Checks to see if a pawn has qualified for a promotion
-	 ***************************************************/
-	bool pawnPromotion(char* board, int positionFrom, int positionTo) {}
-
-	/***************************************************
-	 * CASTLING
-	 * Checks if the conditions for castling have been met
-	 ***************************************************/
-	bool castling(char* board, int positionFrom, int positionTo) {}
 
 	/*********************************************
 	 * MOVE

@@ -330,14 +330,25 @@ bool Chess::move(char* board, int positionFrom, int positionTo)
 
 	// find the set of possible moves from our current location
 	set <int> possiblePrevious = getPossibleMoves(board, positionFrom);
-
-	// only move there is the suggested move is on the set of possible moves
-	if (possiblePrevious.find(positionTo) != possiblePrevious.end())
+	// check for pawn promotion
+	if (pawnPromotion(board, positionFrom, positionTo))
+		return true;
+	// check for castling
+	else if (castle)
 	{
+		if (castling(board, positionFrom, positionTo))
+			return true;
+	}	
+	// only move there is the suggested move is on the set of possible moves
+	else if (possiblePrevious.find(positionTo) != possiblePrevious.end())
+	{
+		
 		board[positionTo] = board[positionFrom];
 		board[positionFrom] = ' ';
 		return true;
 	}
+	else
+		return false;
 }
 
 void Chess::callBack(Interface* pUI, void* p)
