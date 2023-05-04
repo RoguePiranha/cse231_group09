@@ -105,6 +105,7 @@
     <ClCompile Include="uiInteract.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="chess.h" />
     <ClInclude Include="point.h" />
     <ClInclude Include="uiDraw.h" />
     <ClInclude Include="uiInteract.h" />
