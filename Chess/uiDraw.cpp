@@ -25,7 +25,7 @@
 #ifdef __linux__
 #include <GL/gl.h>        // Main OpenGL library
 #include <GL/glut.h>      // Second OpenGL library
-#define GLUT_TEXT GLUT_BITMAP_HELVETICA_12
+#define GLUT_TEXT GLUT_BITMAP_HELVETICA_18
 #endif // __linux__
 
 #ifdef _WIN32
@@ -34,7 +34,7 @@
 #include <GL/glut.h>         // OpenGL library we copied 
 #define _USE_MATH_DEFINES
 #include <math.h>
-#define GLUT_TEXT GLUT_BITMAP_HELVETICA_12
+#define GLUT_TEXT GLUT_BITMAP_HELVETICA_18
 #endif // _WIN32
 
 
@@ -52,39 +52,49 @@ const int RGB_WHITE_SQUARE[] = { 210, 180, 140 };
 const int RGB_BLACK_SQUARE[] = { 165, 42, 42 };
 
 // the color of a selected square
-const int RGB_SELECTED[] = { 256, 0, 0 };
+//const int RGB_SELECTED[] = { 256, 0, 0 };
+//const int RGB_SELECTED[] = { 75, 115, 240 };
+//const int RGB_SELECTED[] = { 100, 150, 255 };
+//const int RGB_SELECTED[] = { 90, 200, 180 };
+const int RGB_SELECTED[] = { 90, 100, 200 };
 
 /*************************************************************************
  * DISPLAY the text in the buffer on the screen
  *************************************************************************/
 void ogstream::flush()
 {
-    string sOut;
-    string sIn = str();
+   string sOut;
+   string sIn = str();
 
-    // copy everything but the newlines
-    for (string::iterator it = sIn.begin(); it != sIn.end(); ++it)
-        // newline triggers an buffer flush and a move down
-        if (*it == '\n')
-        {
-            drawText(x, y, sOut.c_str());
-            sOut.clear();
-            x -= 10;
-        }
-    // othewise append
-        else
-            sOut += *it;
+   // copy everything but the newlines
+   for (string::iterator it = sIn.begin(); it != sIn.end(); ++it)
+      // newline triggers an buffer flush and a move down
+      if (*it == '\n')
+      {
+         drawText(x, y, sOut.c_str());
+         sOut.clear();
+         x -= 10;
+      }
+   // othewise append
+      else
+         sOut += *it;
 
-    // put the text on the screen
-    if (!sOut.empty())
-    {
-        drawText(x, y, sOut.c_str());
-        x -= 10;
-    }
+   // put the text on the screen
+   if (!sOut.empty())
+   {
+      drawText(x, y, sOut.c_str());
+      x -= 10;
+   }
 
-    // reset the buffer
-    str("");
+   // reset the buffer
+   str("");
 }
+
+struct Offset
+{
+   int dx;
+   int dy;
+};
 
 /*************************************************************************
  * DRAW TEXT
@@ -94,14 +104,24 @@ void ogstream::flush()
  ************************************************************************/
 void ogstream::drawText(int x, int y, const char* text) const
 {
-    void* pFont = GLUT_TEXT;
+   void* pFont = GLUT_TEXT;
 
-    // prepare to draw the text from the top-left corner
-    glRasterPos2f((GLfloat)x, (GLfloat)y);
+   Offset offsets[8]{ {-2,-2},{-2,0},{-2,2},{0,2},{2,2},{2,0},{2,-2},{0,-2} };
+   for (auto& offset : offsets)
+   {
+      glRasterPos2f((GLfloat)(x + offset.dx), (GLfloat)(y + offset.dy));
+      for (const char* p = text; *p; p++)
+         glutBitmapCharacter(pFont, *p);
+   }
 
-    // loop through the text
-    for (const char* p = text; *p; p++)
-        glutBitmapCharacter(pFont, *p);
+   glColor3f((GLfloat)255, (GLfloat)255, (GLfloat)255);
+
+   // prepare to draw the text from the top-left corner
+   glRasterPos2f((GLfloat)x, (GLfloat)y);
+
+   // loop through the text
+   for (const char* p = text; *p; p++)
+      glutBitmapCharacter(pFont, *p);
 }
 
 /************************************************************************
@@ -109,11 +129,11 @@ void ogstream::drawText(int x, int y, const char* text) const
 * Set the color on the board
 *   INPUT  rgb  RGB color in integers (0...255)
 *************************************************************************/
-void glColor(const int * rgb)
+void glColor(const int* rgb)
 {
-   glColor3f((GLfloat)(rgb[0] / 256.0), 
-             (GLfloat)(rgb[1] / 256.0),
-             (GLfloat)(rgb[2] / 256.0));
+   glColor3f((GLfloat)(rgb[0] / 256.0),
+      (GLfloat)(rgb[1] / 256.0),
+      (GLfloat)(rgb[2] / 256.0));
 }
 
 /************************************************************************
@@ -125,7 +145,7 @@ void glColor(const int * rgb)
 *************************************************************************/
 void ogstream::drawPiece(int x, int y, bool black, Rect rectangle[], int num) const
 {
-   
+
    GLint xGL = (GLint)(x + 16 /* half a square width */);
    GLint yGL = (GLint)(y + 16 /* half a square height*/);
 
@@ -135,7 +155,7 @@ void ogstream::drawPiece(int x, int y, bool black, Rect rectangle[], int num) co
 
    // iterate through the rectangles
    for (int i = 0; i < num; i++)
-   { 
+   {
       glVertex2i(xGL + rectangle[i].x0, yGL + rectangle[i].y0);
       glVertex2i(xGL + rectangle[i].x1, yGL + rectangle[i].y1);
       glVertex2i(xGL + rectangle[i].x2, yGL + rectangle[i].y2);
@@ -164,7 +184,7 @@ void ogstream::drawKing(int pos, bool black)
       { 8,-4, -8,-4, -8,-5,  8,-5},    // base center
       { 8,-6, -8,-6, -8,-8,  8,-8}     // base
    };
-   
+
    drawPiece(xFromPosition(pos), yFromPosition(pos), black, rectangles, 7);
 }
 
@@ -227,7 +247,7 @@ void ogstream::drawKnight(int pos, bool black)
       {-3,6,   3,6,   6,1,   1,1},  // main
       { 6,1,   1,1,  -5,-5,  5,-5}, // body
       { 6,-6, -6,-6, -6,-8,  6,-8}  // base
-   
+
    };
 
    drawPiece(xFromPosition(pos), yFromPosition(pos), black, rectangles, 5);
@@ -292,14 +312,14 @@ void ogstream::drawBoard()
             glColor(RGB_WHITE_SQUARE);
 
          // draw the square
-         glVertex2i((GLint)((col + 0) * 32 + 1), 
-                    (GLint)((row + 0) * 32 + 1));
-         glVertex2i((GLint)((col + 1) * 32 - 1),
-                    (GLint)((row + 0) * 32 + 1));
-         glVertex2i((GLint)((col + 1) * 32 - 1),
-                    (GLint)((row + 1) * 32 - 1));
          glVertex2i((GLint)((col + 0) * 32 + 1),
-                    (GLint)((row + 1) * 32 - 1));
+            (GLint)((row + 0) * 32 + 1));
+         glVertex2i((GLint)((col + 1) * 32 - 1),
+            (GLint)((row + 0) * 32 + 1));
+         glVertex2i((GLint)((col + 1) * 32 - 1),
+            (GLint)((row + 1) * 32 - 1));
+         glVertex2i((GLint)((col + 0) * 32 + 1),
+            (GLint)((row + 1) * 32 - 1));
       }
 
    // done
@@ -327,14 +347,14 @@ void ogstream::drawSelected(int pos)
    glColor(RGB_SELECTED);
 
    // draw the square
-   glVertex2i((GLint)((col + 0) * 32  + 3),
-              (GLint)((row + 0) * 32 + 3));
-   glVertex2i((GLint)((col + 1) * 32  - 3),
-              (GLint)((row + 0) * 32 + 3));
-   glVertex2i((GLint)((col + 1) * 32  - 3),
-              (GLint)((row + 1) * 32 - 3));
-   glVertex2i((GLint)((col + 0) * 32  + 3),
-              (GLint)((row + 1) * 32 - 3));
+   glVertex2i((GLint)((col + 0) * 32 + 3),
+      (GLint)((row + 0) * 32 + 3));
+   glVertex2i((GLint)((col + 1) * 32 - 3),
+      (GLint)((row + 0) * 32 + 3));
+   glVertex2i((GLint)((col + 1) * 32 - 3),
+      (GLint)((row + 1) * 32 - 3));
+   glVertex2i((GLint)((col + 0) * 32 + 3),
+      (GLint)((row + 1) * 32 - 3));
 
    // indicate we are finished
    glEnd();
@@ -362,13 +382,13 @@ void ogstream::drawHover(int pos)
 
    // draw the square
    glVertex2i((GLint)((col + 0) * 32),
-              (GLint)((row + 0) * 32));
+      (GLint)((row + 0) * 32));
    glVertex2i((GLint)((col + 1) * 32),
-              (GLint)((row + 0) * 32));
+      (GLint)((row + 0) * 32));
    glVertex2i((GLint)((col + 1) * 32),
-              (GLint)((row + 1) * 32));
+      (GLint)((row + 1) * 32));
    glVertex2i((GLint)((col + 0) * 32),
-              (GLint)((row + 1) * 32));
+      (GLint)((row + 1) * 32));
 
    // set the checker-board color
    if ((row + col) % 2 == 0)
@@ -378,13 +398,13 @@ void ogstream::drawHover(int pos)
 
    // draw the square
    glVertex2i((GLint)((col + 0) * 32 + 2),
-              (GLint)((row + 0) * 32 + 2));
+      (GLint)((row + 0) * 32 + 2));
    glVertex2i((GLint)((col + 1) * 32 - 2),
-              (GLint)((row + 0) * 32 + 2));
+      (GLint)((row + 0) * 32 + 2));
    glVertex2i((GLint)((col + 1) * 32 - 2),
-              (GLint)((row + 1) * 32 - 2));
+      (GLint)((row + 1) * 32 - 2));
    glVertex2i((GLint)((col + 0) * 32 + 2),
-              (GLint)((row + 1) * 32 - 2));
+      (GLint)((row + 1) * 32 - 2));
 
 
    // finish the drawing
@@ -412,13 +432,13 @@ void ogstream::drawPossible(int pos)
 
    // draw the square
    glVertex2i((GLint)((col + 0) * 32 + 7),
-              (GLint)((row + 0) * 32 + 7));
+      (GLint)((row + 0) * 32 + 7));
    glVertex2i((GLint)((col + 1) * 32 - 7),
-              (GLint)((row + 0) * 32 + 7));
+      (GLint)((row + 0) * 32 + 7));
    glVertex2i((GLint)((col + 1) * 32 - 7),
-              (GLint)((row + 1) * 32 - 7));
+      (GLint)((row + 1) * 32 - 7));
    glVertex2i((GLint)((col + 0) * 32 + 7),
-              (GLint)((row + 1) * 32 - 7));
+      (GLint)((row + 1) * 32 - 7));
 
    // finish the drawing
    glEnd();
