@@ -41,7 +41,6 @@ class TestBoard
 		}
 		else
 			cout << "Test Passed" << endl;
-		
 	}
 
 	void TestReset()
@@ -50,7 +49,7 @@ class TestBoard
 		b.reset();
 		bool pass;
 		int location;
-		
+
 		for (int i = 0; i < 64; i++)
 		{
 			int row = i / 8;
@@ -110,15 +109,14 @@ class TestBoard
 		Board b;
 		Move m;
 		char setup[64] = {
-		'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r',
-		'p', 'p', 'p', ' ', 'p', 'p', 'p', 'p',
-		' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-		' ', ' ', 'P', 'p', ' ', ' ', ' ', ' ',
-		' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-		' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-		'P', 'P', ' ', 'P', 'P', 'P', 'P', 'P',
-		'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'
-		};
+			'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r',
+			'p', 'p', 'p', ' ', 'p', 'p', 'p', 'p',
+			' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+			' ', ' ', 'P', 'p', ' ', ' ', ' ', ' ',
+			' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+			' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+			'P', 'P', ' ', 'P', 'P', 'P', 'P', 'P',
+			'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'};
 		b.reset(setup);
 		m.source = Position(3, 4);
 		m.dest = Position(4, 5);
@@ -149,15 +147,14 @@ class TestBoard
 		Board b;
 		Move m;
 		char setup[64] = {
-		'r', 'n', ' ', 'q', 'k', 'b', 'n', 'r',
-		'p', 'p', 'P', ' ', 'p', 'p', 'p', 'p',
-		' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-		' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-		' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-		' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-		'P', 'P', ' ', 'P', 'P', 'P', 'P', 'P',
-		'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'
-		};
+			'r', 'n', ' ', 'q', 'k', 'b', 'n', 'r',
+			'p', 'p', 'P', ' ', 'p', 'p', 'p', 'p',
+			' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+			' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+			' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+			' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+			'P', 'P', ' ', 'P', 'P', 'P', 'P', 'P',
+			'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'};
 		b.reset(setup);
 		m.source = Position(3, 2);
 		m.dest = Position(3, 1);
@@ -176,28 +173,25 @@ class TestBoard
 		Board b;
 		Move m;
 		char setup[64] = {
-		'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r',
-		'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p',
-		' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-		' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-		' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-		' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-		'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P',
-		'R', 'N', 'B', 'Q', 'K', ' ', ' ', 'R'
-		};
+			'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r',
+			'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p',
+			' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+			' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+			' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+			' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+			'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P',
+			'R', 'N', 'B', 'Q', 'K', ' ', ' ', 'R'};
 		b.reset(setup);
 		m.source = Position(5, 8);
 		m.dest = Position(7, 8);
 		b.move(m);
-		if (b.board[2] != make_unique<Rook>(Rook(6, 8, true)))
+		if (b.board[62] != make_unique<Rook>(Rook(6, 8, true)))
 		{
-			cout << b.board[2] << endl;
+			cout << b.board[62] << endl;
 			cout << "Test Failed";
 		}
 		else
 			cout << "Test Passed" << endl;
-		
-		return 0;
 	}
 
 	void TestCastleQ()
@@ -205,17 +199,25 @@ class TestBoard
 		Board b;
 		Move m;
 		char setup[64] = {
-		'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r',
-		'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p',
-		' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-		' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-		' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-		' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-		'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P',
-		'R', ' ', ' ', ' ', 'K', 'B', 'N', 'R'
-		};
-		
-		return 0;
+			'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r',
+			'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p',
+			' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+			' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+			' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+			' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+			'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P',
+			'R', ' ', ' ', ' ', 'K', 'B', 'N', 'R'};
+		b.reset(setup);
+		m.source = Position(5, 8);
+		m.dest = Position(3, 8);
+		b.move(m);
+		if (b.board[60] != make_unique<Rook>(Rook(4, 8, true)))
+		{
+			cout << b.board[60] << endl;
+			cout << "Test Failed";
+		}
+		else
+			cout << "Test Passed" << endl;
 	}
 
 	// Test moving piece to an open spot
@@ -235,5 +237,4 @@ class TestBoard
 		else
 			cout << "Test Passed" << endl;
 	}
-
 };
