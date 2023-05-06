@@ -18,11 +18,13 @@ class TestBoard
 {
 	void TestClear()
 	{
-		bool pass;
-		int location;
+		// SETUP
+		bool pass = true;
+		int location = 0;
 		Board b;
 		b.reset();
 		b.clear();
+		// EXERCISE
 		for (int i = 0; i < 64; i++)
 		{
 			int row = i / 8;
@@ -34,6 +36,7 @@ class TestBoard
 				break;
 			}
 		}
+		// VERIFY
 		if (!pass)
 		{
 			cout << b.board[location] << endl;
@@ -41,15 +44,16 @@ class TestBoard
 		}
 		else
 			cout << "Test Passed" << endl;
-	}
+	} // TEARDOWN
 
 	void TestReset()
 	{
+		// SETUP
 		Board b;
 		b.reset();
-		bool pass;
-		int location;
-
+		bool pass = true;
+		int location = 0;
+		// EXERCISE
 		for (int i = 0; i < 64; i++)
 		{
 			int row = i / 8;
@@ -95,6 +99,7 @@ class TestBoard
 			if (!pass)
 				break;
 		}
+		// VERIFY
 		if (!pass)
 		{
 			cout << b.board[location] << endl;
@@ -102,10 +107,11 @@ class TestBoard
 		}
 		else
 			cout << "Test Passed" << endl;
-	}
+	}// TEARDOWN
 
 	int TestEnPassant()
 	{
+		// SETUP
 		Board b;
 		Move m;
 		char setup[64] = {
@@ -120,7 +126,9 @@ class TestBoard
 		b.reset(setup);
 		m.source = Position(3, 4);
 		m.dest = Position(4, 5);
+		// EXERCISE
 		b.move(m);
+		// VERIFY
 		if (b.board[19] != make_unique<Pawn>(Pawn(4, 5, true)))
 		{
 			cout << b.board[19] << endl;
@@ -140,10 +148,11 @@ class TestBoard
 			cout << "Test Passed" << endl;
 
 		return 0;
-	}
+	}// TEARDOWN
 
 	void TestPromotion()
 	{
+		// SETUP
 		Board b;
 		Move m;
 		char setup[64] = {
@@ -158,7 +167,9 @@ class TestBoard
 		b.reset(setup);
 		m.source = Position(3, 2);
 		m.dest = Position(3, 1);
+		// EXERCISE
 		b.move(m);
+		// VERIFY
 		if (b.board[2] != make_unique<Queen>(Queen(3, 1, true)))
 		{
 			cout << b.board[2] << endl;
@@ -170,6 +181,7 @@ class TestBoard
 
 	void TestCastleK()
 	{
+		// SETUP
 		Board b;
 		Move m;
 		char setup[64] = {
@@ -184,7 +196,9 @@ class TestBoard
 		b.reset(setup);
 		m.source = Position(5, 8);
 		m.dest = Position(7, 8);
+		// EXERCISE
 		b.move(m);
+		// VERIFY
 		if (b.board[62] != make_unique<Rook>(Rook(6, 8, true)))
 		{
 			cout << b.board[62] << endl;
@@ -192,10 +206,11 @@ class TestBoard
 		}
 		else
 			cout << "Test Passed" << endl;
-	}
+	}// TEARDOWN
 
 	void TestCastleQ()
 	{
+		// SETUP
 		Board b;
 		Move m;
 		char setup[64] = {
@@ -210,7 +225,9 @@ class TestBoard
 		b.reset(setup);
 		m.source = Position(5, 8);
 		m.dest = Position(3, 8);
+		// EXERCISE
 		b.move(m);
+		// VERIFY
 		if (b.board[60] != make_unique<Rook>(Rook(4, 8, true)))
 		{
 			cout << b.board[60] << endl;
@@ -218,17 +235,20 @@ class TestBoard
 		}
 		else
 			cout << "Test Passed" << endl;
-	}
+	}// TEARDOWN
 
 	// Test moving piece to an open spot
 	void TestMoveToOpen()
 	{
+		// SETUP
 		Board b;
 		Move m;
 		b.reset();
 		m.source = Position(1, 7);
 		m.dest = Position(1, 6);
+		// EXERCISE
 		b.move(m);
+		// VERIFY
 		if (b.board[40] != make_unique<Pawn>(Pawn(1, 6, true)))
 		{
 			cout << b.board[40] << endl;
@@ -236,5 +256,5 @@ class TestBoard
 		}
 		else
 			cout << "Test Passed" << endl;
-	}
+	}// TEARDOWN
 };
