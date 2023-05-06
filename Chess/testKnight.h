@@ -28,21 +28,7 @@ public:
    }
 
 private:
-   /**************************************************
-    * GET MOVES FREE - Knight can move in all directions
-    * +---a-b-c-d-e-f-g-h---+
-    * |                     |
-    * 8                     8
-    * 7         *   *       7
-    * 6       *       *     6
-    * 5          (n)        5
-    * 4       *       *     4
-    * 3         *   *       3
-    * 2                     2
-    * 1                     1
-    * |                     |
-    * +---a-b-c-d-e-f-g-h---+
-    **************************************************/
+ 
    void getMoves_free()
    {
       // setup
@@ -69,21 +55,7 @@ private:
 
    }  // cleanup
 
-   /**************************************************
-    * GET MOVES BLOCKED - Knight is blocked in all directions
-    * +---a-b-c-d-e-f-g-h---+
-    * |                     |
-    * 8                     8
-    * 7        (p) (p)      7
-    * 6      (p)     (p)    6
-    * 5          (n)        5
-    * 4      (p)     (p)    4
-    * 3        (p) (p)      3
-    * 2                     2
-    * 1                     1
-    * |                     |
-    * +---a-b-c-d-e-f-g-h---+
-    **************************************************/
+
    void getMoves_blocked()
    {
       // setup
@@ -126,21 +98,7 @@ private:
       // cleanup
    }
 
-   /**************************************************
-    * GET MOVES CAPTURE - Knight can capture in all directions
-    * +---a-b-c-d-e-f-g-h---+
-    * |                     |
-    * 8                     8
-    * 7        (P) (P)      7
-    * 6      (P)     (P)    6
-    * 5          (n)        5
-    * 4      (P)     (P)    4
-    * 3        (P) (P)      3
-    * 2                     2
-    * 1                     1
-    * |                     |
-    * +---a-b-c-d-e-f-g-h---+
-    **************************************************/
+
    void getMoves_capture()
    {
       // setup

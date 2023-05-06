@@ -28,21 +28,7 @@ public:
    }
 
 private:
-   /**************************************************
-    * GET MOVES FREE - Rook can move in all directions
-    * +---a-b-c-d-e-f-g-h---+
-    * |                     |
-    * 8           *         8
-    * 7           *         7
-    * 6           *         6
-    * 5   * * * *(r)* * *   5
-    * 4           *         4
-    * 3           *         3
-    * 2           *         2
-    * 1           *         1
-    * |                     |
-    * +---a-b-c-d-e-f-g-h---+
-    **************************************************/
+
    void getMoves_free()
    {
       // setup
@@ -69,21 +55,7 @@ private:
 
    }  // cleanup
 
-   /**************************************************
-    * GET MOVES BLOCKED - Rook is blocked in all directions
-    * +---a-b-c-d-e-f-g-h---+
-    * |                     |
-    * 8                     8
-    * 7                     7
-    * 6           p         6
-    * 5         p(r)p       5
-    * 4           p         4
-    * 3                     3
-    * 2                     2
-    * 1                     1
-    * |                     |
-    * +---a-b-c-d-e-f-g-h---+
-    **************************************************/
+
    void getMoves_blocked()
    {
       // setup
@@ -118,21 +90,7 @@ private:
       // cleanup
    }
 
-   /**************************************************
-    * GET MOVES CAPTURE - Rook can capture in all directions
-    * +---a-b-c-d-e-f-g-h---+
-    * |                     |
-    * 8                     8
-    * 7                     7
-    * 6           P         6
-    * 5         P(r)P       5
-    * 4           P         4
-    * 3                     3
-    * 2                     2
-    * 1                     1
-    * |                     |
-    * +---a-b-c-d-e-f-g-h---+
-    **************************************************/
+
    void getMoves_capture()
    {
       // setup

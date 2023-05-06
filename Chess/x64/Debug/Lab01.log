@@ -1,16 +1,13 @@
-﻿  bishop.cpp
+﻿  King.cpp
+  bishop.cpp
   board.cpp
   chess.cpp
   game.cpp
   knight.cpp
-  move.cpp
   pawn.cpp
   piece.cpp
-  position.cpp
-  King.cpp
   queen.cpp
   rook.cpp
-  uiDraw.cpp
-  uiInteract.cpp
   Generating Code...
+  LINK : C:\Users\offic\Documents\GitHub\cse231_group09\Chess\x64\Debug\Lab01.exe not found or not built by the last incremental link; performing full link
   Lab01.vcxproj -> C:\Users\offic\Documents\GitHub\cse231_group09\Chess\x64\Debug\Lab01.exe

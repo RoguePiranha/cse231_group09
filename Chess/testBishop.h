@@ -28,21 +28,7 @@ public:
    }
 
 private:
-   /**************************************************
-    * GET MOVES FREE - Bishop can move in all directions
-    * +---a-b-c-d-e-f-g-h---+
-    * |                     |
-    * 8     *           *   8
-    * 7       *       *     7
-    * 6         *   *       6
-    * 5          (b)        5
-    * 4         *   *       4
-    * 3       *       *     3
-    * 2     *           *   2
-    * 1   *                 1
-    * |                     |
-    * +---a-b-c-d-e-f-g-h---+
-    **************************************************/
+  
    void getMoves_free()
    {
       // setup
@@ -69,21 +55,7 @@ private:
 
    }  // cleanup
 
-   /**************************************************
-    * GET MOVES BLOCKED - Bishop is blocked in all directions
-    * +---a-b-c-d-e-f-g-h---+
-    * |                     |
-    * 8                     8
-    * 7                     7
-    * 6        (p) (p)      6
-    * 5          (b)        5
-    * 4        (p) (p)      4
-    * 3                     3
-    * 2                     2
-    * 1                     1
-    * |                     |
-    * +---a-b-c-d-e-f-g-h---+
-    **************************************************/
+ 
    void getMoves_blocked()
    {
       // setup
@@ -118,21 +90,6 @@ private:
       // cleanup
    }
 
-   /**************************************************
-    * GET MOVES CAPTURE - Bishop can capture in all directions
-    * +---a-b-c-d-e-f-g-h---+
-    * |                     |
-    * 8                     8
-    * 7                     7
-    * 6        (P) (P)      6
-    * 5          (b)        5
-    * 4        (P) (P)      4
-    * 3                     3
-    * 2                     2
-    * 1                     1
-    * |                     |
-    * +---a-b-c-d-e-f-g-h---+
-    **************************************************/
    void getMoves_capture()
    {
       // setup
