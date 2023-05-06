@@ -1,6 +1,6 @@
 #include "chess.h"
 
-inline bool Chess::isNotWhite(const char* board, int row, int col)
+inline bool Chess::isNotWhite(const char *board, int row, int col)
 {
 	// not white if we are off the board or if we are looking at a space
 	if (row < 0 || row >= 8 || col < 0 || col >= 8)
@@ -10,7 +10,7 @@ inline bool Chess::isNotWhite(const char* board, int row, int col)
 	return piece == ' ' || (piece >= 'A' && piece <= 'Z');
 }
 
-inline bool Chess::isWhite(const char* board, int row, int col)
+inline bool Chess::isWhite(const char *board, int row, int col)
 {
 	// not white if we are off the board or if we are looking at a space
 	if (row < 0 || row >= 8 || col < 0 || col >= 8)
@@ -20,7 +20,7 @@ inline bool Chess::isWhite(const char* board, int row, int col)
 	return (piece >= 'a' && piece <= 'z');
 }
 
-inline bool Chess::isNotBlack(const char* board, int row, int col)
+inline bool Chess::isNotBlack(const char *board, int row, int col)
 {
 	// not white if we are off the board or if we are looking at a space
 	if (row < 0 || row >= 8 || col < 0 || col >= 8)
@@ -30,7 +30,7 @@ inline bool Chess::isNotBlack(const char* board, int row, int col)
 	return piece == ' ' || (piece >= 'a' && piece <= 'z');
 }
 
-inline bool Chess::isBlack(const char* board, int row, int col)
+inline bool Chess::isBlack(const char *board, int row, int col)
 {
 	// not white if we are off the board or if we are looking at a space
 	if (row < 0 || row >= 8 || col < 0 || col >= 8)
@@ -40,17 +40,17 @@ inline bool Chess::isBlack(const char* board, int row, int col)
 	return (piece >= 'A' && piece <= 'Z');
 }
 
-set <int> Chess::getPossibleMoves(const char* board, int location)
+set<int> Chess::getPossibleMoves(const char *board, int location)
 {
-	set <int> possible;
+	set<int> possible;
 
 	// return the empty set if there simply are no possible moves
 	if (location < 0 || location >= 64 || board[location] == ' ')
 		return possible;
-	int row = location / 8;  // current location row
-	int col = location % 8;  // current location column
-	int r;                   // the row we are checking
-	int c;                   // the column we are checking
+	int row = location / 8; // current location row
+	int col = location % 8; // current location column
+	int r;					// the row we are checking
+	int c;					// the column we are checking
 	bool amBlack = isBlack(board, row, col);
 
 	//
@@ -61,34 +61,34 @@ set <int> Chess::getPossibleMoves(const char* board, int location)
 		c = col;
 		r = row - 2;
 		if (row == 6 && board[r * 8 + c] == ' ')
-			possible.insert(r * 8 + c);  // forward two blank spaces
+			possible.insert(r * 8 + c); // forward two blank spaces
 		r = row - 1;
 		if (r >= 0 && board[r * 8 + c] == ' ')
-			possible.insert(r * 8 + c);  // forward one black space
+			possible.insert(r * 8 + c); // forward one black space
 		c = col - 1;
 		if (isWhite(board, r, c))
-			possible.insert(r * 8 + c);    // attack left
+			possible.insert(r * 8 + c); // attack left
 		c = col + 1;
 		if (isWhite(board, r, c))
-			possible.insert(r * 8 + c);    // attack right
-		// what about en-passant and pawn promotion
+			possible.insert(r * 8 + c); // attack right
+										// what about en-passant and pawn promotion
 	}
 	if (board[location] == 'p')
 	{
 		c = col;
 		r = row + 2;
 		if (row == 1 && board[r * 8 + c] == ' ')
-			possible.insert(r * 8 + c);  // forward two blank spaces
+			possible.insert(r * 8 + c); // forward two blank spaces
 		r = row + 1;
 		if (r < 8 && board[r * 8 + c] == ' ')
-			possible.insert(r * 8 + c);    // forward one blank space
+			possible.insert(r * 8 + c); // forward one blank space
 		c = col - 1;
 		if (isBlack(board, r, c))
-			possible.insert(r * 8 + c);      // attack left
+			possible.insert(r * 8 + c); // attack left
 		c = col + 1;
 		if (isBlack(board, r, c))
-			possible.insert(r * 8 + c);      // attack right
-		// what about en-passant and pawn promotion
+			possible.insert(r * 8 + c); // attack right
+										// what about en-passant and pawn promotion
 	}
 
 	//
@@ -97,12 +97,8 @@ set <int> Chess::getPossibleMoves(const char* board, int location)
 	if (board[location] == 'N' || board[location] == 'n')
 	{
 		RC moves[8] =
-		{
-				 {-1,  2}, { 1,  2},
-		{-2,  1},                    { 2,  1},
-		{-2, -1},                    { 2, -1},
-				 {-1, -2}, { 1, -2}
-		};
+			{
+				{-1, 2}, {1, 2}, {-2, 1}, {2, 1}, {-2, -1}, {2, -1}, {-1, -2}, {1, -2}};
 		for (int i = 0; i < 8; i++)
 		{
 			r = row + moves[i].row;
@@ -120,11 +116,8 @@ set <int> Chess::getPossibleMoves(const char* board, int location)
 	if (board[location] == 'K' || board[location] == 'k')
 	{
 		RC moves[8] =
-		{
-		   {-1,  1}, {0,  1}, {1,  1},
-		   {-1,  0},          {1,  0},
-		   {-1, -1}, {0, -1}, {1, -1}
-		};
+			{
+				{-1, 1}, {0, 1}, {1, 1}, {-1, 0}, {1, 0}, {-1, -1}, {0, -1}, {1, -1}};
 		for (int i = 0; i < 8; i++)
 		{
 			r = row + moves[i].row;
@@ -143,17 +136,14 @@ set <int> Chess::getPossibleMoves(const char* board, int location)
 	if (board[location] == 'Q' || board[location] == 'q')
 	{
 		RC moves[8] =
-		{
-		   {-1,  1}, {0,  1}, {1,  1},
-		   {-1,  0},          {1,  0},
-		   {-1, -1}, {0, -1}, {1, -1}
-		};
+			{
+				{-1, 1}, {0, 1}, {1, 1}, {-1, 0}, {1, 0}, {-1, -1}, {0, -1}, {1, -1}};
 		for (int i = 0; i < 8; i++)
 		{
 			r = row + moves[i].row;
 			c = col + moves[i].col;
 			while (r >= 0 && r < 8 && c >= 0 && c < 8 &&
-				board[r * 8 + c] == ' ')
+				   board[r * 8 + c] == ' ')
 			{
 				possible.insert(r * 8 + c);
 				r += moves[i].row;
@@ -172,17 +162,17 @@ set <int> Chess::getPossibleMoves(const char* board, int location)
 	if (board[location] == 'R' || board[location] == 'r')
 	{
 		RC moves[4] =
-		{
-					{0,  1},
-		   {-1, 0},         {1, 0},
-					{0, -1}
-		};
+			{
+				{0, 1},
+				{-1, 0},
+				{1, 0},
+				{0, -1}};
 		for (int i = 0; i < 4; i++)
 		{
 			r = row + moves[i].row;
 			c = col + moves[i].col;
 			while (r >= 0 && r < 8 && c >= 0 && c < 8 &&
-				board[r * 8 + c] == ' ')
+				   board[r * 8 + c] == ' ')
 			{
 				possible.insert(r * 8 + c);
 				r += moves[i].row;
@@ -201,16 +191,14 @@ set <int> Chess::getPossibleMoves(const char* board, int location)
 	if (board[location] == 'B' || board[location] == 'b')
 	{
 		RC moves[4] =
-		{
-		   {-1,  1}, {1,  1},
-		   {-1, -1}, {1, -1}
-		};
+			{
+				{-1, 1}, {1, 1}, {-1, -1}, {1, -1}};
 		for (int i = 0; i < 4; i++)
 		{
 			r = row + moves[i].row;
 			c = col + moves[i].col;
 			while (r >= 0 && r < 8 && c >= 0 && c < 8 &&
-				board[r * 8 + c] == ' ')
+				   board[r * 8 + c] == ' ')
 			{
 				possible.insert(r * 8 + c);
 				r += moves[i].row;
@@ -226,7 +214,7 @@ set <int> Chess::getPossibleMoves(const char* board, int location)
 	return possible;
 }
 
-void Chess::draw(const char* board, const Interface& ui, const set <int>& possible)
+void Chess::draw(const char *board, const Interface &ui, const set<int> &possible)
 {
 	ogstream gout;
 
@@ -238,7 +226,7 @@ void Chess::draw(const char* board, const Interface& ui, const set <int>& possib
 	gout.drawSelected(ui.getSelectPosition());
 
 	// draw the possible moves
-	set <int> ::iterator it;
+	set<int>::iterator it;
 	for (it = possible.begin(); it != possible.end(); ++it)
 		gout.drawPossible(*it);
 
@@ -285,15 +273,17 @@ void Chess::draw(const char* board, const Interface& ui, const set <int>& possib
 		}
 }
 
-bool Chess::pawnPromotion(char* board, int positionFrom, int positionTo)
+bool Chess::pawnPromotion(char *board, int positionFrom, int positionTo)
 {
 	// promotes a pawn to Queen if it has reached the other end of the board.
-	if (board[positionFrom] == 'P' && (positionTo >= 0 && positionTo <= 7)) {
+	if (board[positionFrom] == 'P' && (positionTo >= 0 && positionTo <= 7))
+	{
 		board[positionTo] == 'Q';
 		board[positionFrom] = ' ';
 		return true;
 	}
-	else if (board[positionFrom] == 'p' && (positionTo >= 57 && positionTo <= 63)) {
+	else if (board[positionFrom] == 'p' && (positionTo >= 57 && positionTo <= 63))
+	{
 		board[positionTo] == 'q';
 		board[positionFrom] = ' ';
 		return true;
@@ -302,46 +292,93 @@ bool Chess::pawnPromotion(char* board, int positionFrom, int positionTo)
 		return false;
 }
 
-bool Chess::castling(char* board, int positionFrom, int positionTo)
+bool Chess::castling(char *board, int positionFrom, int positionTo)
 {
 	// castling
 	if ((positionFrom == 60 && board[positionFrom] == 'K') && (positionTo == 63 || positionTo == 56))
 	{
-		if (positionTo == 63 && board[62] == ' ' && board[61] == ' ') {}
-		else if (positionTo == 56 && board[57] == ' ' && board[58] == ' ' && board[59] == ' ') {}
+		if (positionTo == 63 && board[62] == ' ' && board[61] == ' ')
+		{
+		}
+		else if (positionTo == 56 && board[57] == ' ' && board[58] == ' ' && board[59] == ' ')
+		{
+		}
 	}
 	else if ((positionFrom == 4 && board[positionFrom] == 'k') && (positionTo == 7 || positionTo == 0))
 	{
-		if (positionTo == 7 && board[6] == ' ' && board[5] == ' ') {}
-		else if (positionTo == 0 && board[1] == ' ' && board[2] == ' ' && board[3] == ' ') {}
+		if (positionTo == 7 && board[6] == ' ' && board[5] == ' ')
+		{
+		}
+		else if (positionTo == 0 && board[1] == ' ' && board[2] == ' ' && board[3] == ' ')
+		{
+		}
 	}
 	else
 		return false;
 }
 
-bool Chess::kingMoved(char* board) {
+bool Chess::kingMoved(char *board)
+{
 	// Find the current position of the black and white kings
 	int blackKingPos = -1;
 	int whiteKingPos = -1;
-	for (int i = 0; i < 64; i++) {
-		if (board[i] == 'k') {
+	for (int i = 0; i < 64; i++)
+	{
+		if (board[i] == 'k')
+		{
 			blackKingPos = i;
 		}
-		else if (board[i] == 'K') {
+		else if (board[i] == 'K')
+		{
 			whiteKingPos = i;
 		}
 	}
 
 	// Check if either king has moved
-	if (blackKingPos != 4 || whiteKingPos != 60) {
+	if (blackKingPos != 4 || whiteKingPos != 60)
+	{
 		return true;
 	}
-	else {
+	else
+	{
 		return false;
 	}
 }
 
-bool Chess::move(char* board, int positionFrom, int positionTo)
+bool Chess::enPassant(char *board, int positionFrom, int positionTo, int enPassantTarget)
+{
+	// En passant for white pawn
+	if (board[positionFrom] == 'P' && positionTo == enPassantTarget)
+	{
+		int targetRow = (enPassantTarget / 8) + 1;
+		int targetCol = enPassantTarget % 8;
+		if (board[targetRow * 8 + targetCol] == 'p')
+		{
+			board[positionTo] = 'P';
+			board[positionFrom] = ' ';
+			board[targetRow * 8 + targetCol] = ' ';
+			return true;
+		}
+	}
+
+	// En passant for black pawn
+	if (board[positionFrom] == 'p' && positionTo == enPassantTarget)
+	{
+		int targetRow = (enPassantTarget / 8) - 1;
+		int targetCol = enPassantTarget % 8;
+		if (board[targetRow * 8 + targetCol] == 'P')
+		{
+			board[positionTo] = 'p';
+			board[positionFrom] = ' ';
+			board[targetRow * 8 + targetCol] = ' ';
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool Chess::move(char *board, int positionFrom, int positionTo, int enPassantTarget, bool whiteCastle, bool blackCastle)
 {
 	// do not move if a move was not indicated
 	if (positionFrom == -1 || positionTo == -1)
@@ -349,9 +386,15 @@ bool Chess::move(char* board, int positionFrom, int positionTo)
 	assert(positionFrom >= 0 && positionFrom < 64);
 	assert(positionTo >= 0 && positionTo < 64);
 
+		// Check for en passant
+	if (enPassant(board, positionFrom, positionTo, enPassantTarget))
+	{
+		// Update enPassantTarget if needed
+		return true;
+	}
 
 	// find the set of possible moves from our current location
-	set <int> possiblePrevious = getPossibleMoves(board, positionFrom);
+	set<int> possiblePrevious = getPossibleMoves(board, positionFrom);
 	// check for pawn promotion
 	if (pawnPromotion(board, positionFrom, positionTo))
 		return true;
@@ -360,7 +403,7 @@ bool Chess::move(char* board, int positionFrom, int positionTo)
 	{
 		if (castling(board, positionFrom, positionTo))
 			return true;
-	}	
+	}
 	// only move there is the suggested move is on the set of possible moves
 	else if (possiblePrevious.find(positionTo) != possiblePrevious.end())
 	{
@@ -372,15 +415,15 @@ bool Chess::move(char* board, int positionFrom, int positionTo)
 		return false;
 }
 
-void Chess::callBack(Interface* pUI, void* p)
+void Chess::callBack(Interface *pUI, void *p)
 {
-	set <int> possible;
+	set<int> possible;
 
 	// the first step is to cast the void pointer into a game object. This
-	// is the first step of every single callback function in OpenGL. 
-	char* board = (char*)p;
+	// is the first step of every single callback function in OpenGL.
+	char *board = (char *)p;
 
-	// move 
+	// move
 	if (move(board, pUI->getPreviousPosition(), pUI->getSelectPosition()))
 		pUI->clearSelectPosition();
 	else
@@ -392,10 +435,9 @@ void Chess::callBack(Interface* pUI, void* p)
 
 	// draw the board
 	draw(board, *pUI, possible);
-
 }
 
-void parse(const string& textMove, int& positionFrom, int& positionTo)
+void parse(const string &textMove, int &positionFrom, int &positionTo)
 {
 	string::const_iterator it = textMove.cbegin();
 
@@ -423,32 +465,31 @@ void parse(const string& textMove, int& positionFrom, int& positionTo)
 	{
 		switch (*it)
 		{
-		case 'p':   // capture a pawn
-		case 'n':   // capture a knight
-		case 'b':   // capture a bishop
-		case 'r':   // capture a rook
-		case 'q':   // capture a queen
-		case 'k':   // !! you can't capture a king you silly!
+		case 'p': // capture a pawn
+		case 'n': // capture a knight
+		case 'b': // capture a bishop
+		case 'r': // capture a rook
+		case 'q': // capture a queen
+		case 'k': // !! you can't capture a king you silly!
 			capture = tolower(*it);
 			break;
 
-		case 'c':  // short castling or king's castle
+		case 'c': // short castling or king's castle
 			castleK = true;
 			break;
-		case 'C':  // long castling or queen's castle
+		case 'C': // long castling or queen's castle
 			castleQ = true;
 			break;
-		case 'E':  // En-passant
+		case 'E': // En-passant
 			enpassant = true;
 			break;
 
-		case 'N':  // Promote to knight
-		case 'B':  // Promote to Bishop
-		case 'R':  // Promote to Rook
-		case 'Q':  // Promote to Queen
+		case 'N': // Promote to knight
+		case 'B': // Promote to Bishop
+		case 'R': // Promote to Rook
+		case 'Q': // Promote to Queen
 			piecePromotion = *it;
 			break;
-
 		}
 	}
 
@@ -459,10 +500,10 @@ void parse(const string& textMove, int& positionFrom, int& positionTo)
 }
 
 /********************************************************
-* READ FILE
-* Read a file where moves are encoded in Smith notation
-*******************************************************/
-void Chess::readFile(const char* fileName, char* board)
+ * READ FILE
+ * Read a file where moves are encoded in Smith notation
+ *******************************************************/
+void Chess::readFile(const char *fileName, char *board)
 {
 	// open the file
 	ifstream fin(fileName);
