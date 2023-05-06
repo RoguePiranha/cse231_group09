@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 
+class TestBoard;
  /**************************************************
   * MOVE
   * Represents the different types of moves in chess
@@ -46,7 +47,7 @@ public:
    void setCastleK() { castleK = true; }
    void setCastleQ() { castleQ = true; }
    void setWhiteMove(bool isWhite) { this->isWhite = isWhite; }
-
+   friend TestBoard;
 private:
    Position source;
    Position dest;

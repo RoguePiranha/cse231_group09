@@ -12,7 +12,9 @@
 #include <memory>
 #include <array>
 
+using namespace std;
 enum Winner;
+class TestBoard;
 
 /**************************************************
  * BOARD
@@ -21,19 +23,22 @@ enum Winner;
 class Board
 {
 public:
+	friend TestBoard;
    Board() : currentMove(0) { reset(); }
    int getCurrentMove() const { return currentMove; }
-   void display(const Position& hover, const Position& selected) const {}
+   //void display(const Position& hover, const Position& selected) const {}
    const Piece& get(const Position& pos) const;
    void reset();
+   void reset(char setup[64]);
    void clear();
    void move(const Move& move);
    void setCurrentMove(int currentMove) { this->currentMove = currentMove; }
+   // For testing
    void assign(const Piece& piece) { board[piece.getPosition().getLocation()] = piece.clone(); }
    void draw(Interface* pUI, Winner winner) const;
 
 private:
-   std::array<std::unique_ptr<Piece>, 64> board;
+   array<unique_ptr<Piece>, 64> board;
    int currentMove;
 
    void moveTo(Position pos1, Position pos2);

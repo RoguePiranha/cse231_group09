@@ -77,6 +77,57 @@ void Board::reset()
    }
 }
 
+void Board::reset(char setup[64])
+{
+    for (int i = 0; i < 64; i++)
+    {
+        int row = i / 8;
+        int col = i % 8;
+        switch (setup[i])
+        {
+        case 'p':
+            board[i] = make_unique<Pawn>(Pawn(col, row, false));
+            break;
+        case 'P':
+            board[i] = make_unique<Pawn>(Pawn(col, row, true));
+            break;
+        case 'r':
+            board[i] = make_unique<Rook>(Rook(col, row, false));
+            break;
+        case 'R':
+            board[i] = make_unique<Rook>(Rook(col, row, true));
+            break;
+        case 'n':
+            board[i] = make_unique<Knight>(Knight(col, row, false));
+            break;
+        case 'N':
+            board[i] = make_unique<Knight>(Knight(col, row, true));
+            break;
+        case 'b':
+            board[i] = make_unique<Bishop>(Bishop(col, row, false));
+            break;
+        case 'B':
+            board[i] = make_unique<Bishop>(Bishop(col, row, true));
+            break;
+        case 'q':
+            board[i] = make_unique<Queen>(Queen(col, row, false));
+            break;
+        case 'Q':
+            board[i] = make_unique<Queen>(Queen(col, row, true));
+            break;
+        case 'k':
+            board[i] = make_unique<King>(King(col, row, false));
+            break;
+        case 'K':
+            board[i] = make_unique<King>(King(col, row, true));
+            break;
+        default:
+            board[i] = make_unique<Space>(Space(col, row, false));
+            break;
+        }
+    }
+}
+
 /**************************************************
  * BOARD :: CLEAR
  * Fill the board with spaces
