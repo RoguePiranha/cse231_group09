@@ -98,16 +98,6 @@ public:
       posHover = pos;
    }
 
-   bool getBlackCastling()
-   {
-       return blackCastling;
-   }
-
-   bool getWhiteCastling()
-   {
-       return whiteCastling;
-   }
-
    static void* p;                   // for client
    static void (*callBack)(Interface*, void*);
 
@@ -124,9 +114,6 @@ private:
    
    static int widthScreen;
    static int heightScreen;
-
-   bool blackCastling = true;
-   bool whiteCastling = true;
 };
 
 /************************************************************************
