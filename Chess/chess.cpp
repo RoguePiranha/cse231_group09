@@ -10,6 +10,7 @@
 #include "testKnight.h"   // for Knight unit tests
 #include "testRook.h"     // for Rook unit tests
 #include "testPawn.h"     // for Pawn unit tests
+#include "TestBoard.h"
 #include "board.h"
 #include "game.h"
 
@@ -20,7 +21,7 @@
 
 using namespace std;
 
-//#define DEBUG
+#define DEBUG
 
 /*************************************
  * All the interesting work happens here, when
@@ -78,6 +79,9 @@ int main(int argc, char** argv)
    testRook.run();
    TestPawn testPawn;
    testPawn.run();
+   TestBoard testBoard;
+   testBoard.Run();
+
 #endif
 
    Game game;

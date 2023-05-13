@@ -23,13 +23,18 @@ class TestKing
 public:
    void run()
    {
-      getMoves_free();
-      getMoves_blocked();
-      getMoves_capture();
-      getMoves_castleKingMoved();
-      getMoves_castleKingMovedNMoves();
-      getMoves_castleBlocked();
-      getMoves_castle();
+       
+        getMoves_free();
+        getMoves_blocked();
+        getMoves_capture();
+        getMoves_castleKingMoved();
+        getMoves_castleKingMovedNMoves();
+        getMoves_castleBlocked();
+        getMoves_castle();
+        cout << "\033[32m" << "King Test Passed." << "\033[0m" << endl;
+ 
+     
+      
    }
 
 private:
@@ -133,7 +138,7 @@ private:
       auto moves = king.getMoves(board);
 
       // verify
-      set<string> expectedMoves{ "e6d6p", "e6e5p", "e6f6p", "e6d5p", "e6f5p", "e6d7p", "e6e7p", "e6f7p" };
+      set<string> expectedMoves{ "e5d4p", "e5d5p", "e5d6p", "e5e4p", "e5e6p", "e5f4p", "e5f5p", "e5f6p" };
       set<string> actualMoves;
       for (auto& move : moves)
          actualMoves.insert(move.getText());

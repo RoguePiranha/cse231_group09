@@ -1,12 +1,12 @@
-﻿  King.cpp
-  bishop.cpp
-  board.cpp
+﻿  board.cpp
   chess.cpp
-  game.cpp
-  knight.cpp
-  pawn.cpp
-  piece.cpp
-  queen.cpp
+C:\Users\offic\Documents\GitHub\cse231_group09\Chess\TestBoard.h(78,16): warning C4834: discarding return value of function with 'nodiscard' attribute
+C:\Users\offic\Documents\GitHub\cse231_group09\Chess\TestBoard.h(83,16): warning C4834: discarding return value of function with 'nodiscard' attribute
+C:\Users\offic\Documents\GitHub\cse231_group09\Chess\TestBoard.h(88,16): warning C4834: discarding return value of function with 'nodiscard' attribute
+C:\Users\offic\Documents\GitHub\cse231_group09\Chess\TestBoard.h(93,16): warning C4834: discarding return value of function with 'nodiscard' attribute
+C:\Users\offic\Documents\GitHub\cse231_group09\Chess\TestBoard.h(98,16): warning C4834: discarding return value of function with 'nodiscard' attribute
+C:\Users\offic\Documents\GitHub\cse231_group09\Chess\TestBoard.h(103,16): warning C4834: discarding return value of function with 'nodiscard' attribute
+C:\Users\offic\Documents\GitHub\cse231_group09\Chess\TestBoard.h(108,16): warning C4834: discarding return value of function with 'nodiscard' attribute
   rook.cpp
   Generating Code...
   Lab01.vcxproj -> C:\Users\offic\Documents\GitHub\cse231_group09\Chess\x64\Debug\Lab01.exe

@@ -27,6 +27,7 @@ public:
       getMoves_capture();
       getMoves_enpassant();
       getMoves_promotion();
+      cout << "\033[32m" << "Pawn Test Passed." << "\033[0m" << endl;
    }
 
 private:

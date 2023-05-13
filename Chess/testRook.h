@@ -25,6 +25,7 @@ public:
       getMoves_free();
       getMoves_blocked();
       getMoves_capture();
+      cout << "\033[32m" << "Rook Test Passed." << "\033[0m" << endl;
    }
 
 private:

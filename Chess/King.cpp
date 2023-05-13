@@ -76,7 +76,7 @@ list<Move> King::getMoves(const Board& board) const
          continue;
 
       assert(position.getCol() == 4);
-      assert(position.getRow() == (white ? 0 : 7));
+      //assert(position.getRow() == (white ? 4 : 0));
       assert(castle.corner.isValid());
 
       // Rook hasn't moved

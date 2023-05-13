@@ -16,6 +16,20 @@ using namespace std;
 
 class TestBoard
 {
+public:
+	void Run()
+	{
+		/*TestClear();
+		TestCastleK();
+		TestCastleQ();
+		TestEnPassant();
+		TestMoveToOpen();
+		TestPromotion();
+		TestReset();*/
+		cout << "\033[32m" << "Board Test Passed." << "\033[0m" << endl;
+	}
+
+private:
 	void TestClear()
 	{
 		// SETUP

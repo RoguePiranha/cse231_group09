@@ -25,6 +25,7 @@ public:
       getMoves_capture();
       getMoves_blocked();
       getMoves_bottomLeft();
+      cout << "\033[32m" << "Queen Test Passed." << "\033[0m" << endl;
    }
 
 private:
