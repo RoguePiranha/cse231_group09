@@ -19,13 +19,13 @@ class TestBoard
 public:
 	void Run()
 	{
-		/*TestClear();
+		TestClear();
 		TestCastleK();
 		TestCastleQ();
 		TestEnPassant();
 		TestMoveToOpen();
 		TestPromotion();
-		TestReset();*/
+		TestReset();
 		cout << "\033[32m" << "Board Test Passed." << "\033[0m" << endl;
 	}
 
