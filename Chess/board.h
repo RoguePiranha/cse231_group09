@@ -11,8 +11,10 @@
 
 #include <memory>
 #include <array>
+#include "json.hpp"
 
 using namespace std;
+using json = nlohmann::json;
 enum Winner;
 class TestBoard;
 
@@ -36,6 +38,10 @@ public:
    // For testing
    void assign(const Piece& piece) { board[piece.getPosition().getLocation()] = piece.clone(); }
    void draw(Interface* pUI, Winner winner) const;
+   void save(const Board &board);
+   void load(Board &board);
+   json getBoardState() const;
+   void setBoardState(const json& j);
 
 private:
    array<unique_ptr<Piece>, 64> board;

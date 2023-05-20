@@ -15,14 +15,18 @@
 
 #include <cassert>
 #include <memory>
+#include <fstream>
+#include <string>
+#include "json.hpp"
 
 using namespace std;
+using json = nlohmann::json;
 
 /**************************************************
  * BOARD :: GET
  * Get a piece from the board
  **************************************************/
-const Piece& Board::get(const Position& pos) const
+const Piece &Board::get(const Position &pos) const
 {
    if (!pos.isValid())
       throw "Cannot get piece from invalid position";
@@ -37,15 +41,14 @@ const Piece& Board::get(const Position& pos) const
 void Board::reset()
 {
    char setup[64] = {
-      'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r',
-      'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p',
-      ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-      ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-      ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-      ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-      'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p',
-      'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'
-   };
+       'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r',
+       'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p',
+       ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+       ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+       ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+       ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+       'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p',
+       'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'};
    for (int i = 0; i < 64; i++)
    {
       int row = i / 8;
@@ -79,53 +82,53 @@ void Board::reset()
 
 void Board::reset(char setup[64])
 {
-    for (int i = 0; i < 64; i++)
-    {
-        int row = i / 8;
-        int col = i % 8;
-        switch (setup[i])
-        {
-        case 'p':
-            board[i] = make_unique<Pawn>(Pawn(col, row, false));
-            break;
-        case 'P':
-            board[i] = make_unique<Pawn>(Pawn(col, row, true));
-            break;
-        case 'r':
-            board[i] = make_unique<Rook>(Rook(col, row, false));
-            break;
-        case 'R':
-            board[i] = make_unique<Rook>(Rook(col, row, true));
-            break;
-        case 'n':
-            board[i] = make_unique<Knight>(Knight(col, row, false));
-            break;
-        case 'N':
-            board[i] = make_unique<Knight>(Knight(col, row, true));
-            break;
-        case 'b':
-            board[i] = make_unique<Bishop>(Bishop(col, row, false));
-            break;
-        case 'B':
-            board[i] = make_unique<Bishop>(Bishop(col, row, true));
-            break;
-        case 'q':
-            board[i] = make_unique<Queen>(Queen(col, row, false));
-            break;
-        case 'Q':
-            board[i] = make_unique<Queen>(Queen(col, row, true));
-            break;
-        case 'k':
-            board[i] = make_unique<King>(King(col, row, false));
-            break;
-        case 'K':
-            board[i] = make_unique<King>(King(col, row, true));
-            break;
-        default:
-            board[i] = make_unique<Space>(Space(col, row, false));
-            break;
-        }
-    }
+   for (int i = 0; i < 64; i++)
+   {
+      int row = i / 8;
+      int col = i % 8;
+      switch (setup[i])
+      {
+      case 'p':
+         board[i] = make_unique<Pawn>(Pawn(col, row, false));
+         break;
+      case 'P':
+         board[i] = make_unique<Pawn>(Pawn(col, row, true));
+         break;
+      case 'r':
+         board[i] = make_unique<Rook>(Rook(col, row, false));
+         break;
+      case 'R':
+         board[i] = make_unique<Rook>(Rook(col, row, true));
+         break;
+      case 'n':
+         board[i] = make_unique<Knight>(Knight(col, row, false));
+         break;
+      case 'N':
+         board[i] = make_unique<Knight>(Knight(col, row, true));
+         break;
+      case 'b':
+         board[i] = make_unique<Bishop>(Bishop(col, row, false));
+         break;
+      case 'B':
+         board[i] = make_unique<Bishop>(Bishop(col, row, true));
+         break;
+      case 'q':
+         board[i] = make_unique<Queen>(Queen(col, row, false));
+         break;
+      case 'Q':
+         board[i] = make_unique<Queen>(Queen(col, row, true));
+         break;
+      case 'k':
+         board[i] = make_unique<King>(King(col, row, false));
+         break;
+      case 'K':
+         board[i] = make_unique<King>(King(col, row, true));
+         break;
+      default:
+         board[i] = make_unique<Space>(Space(col, row, false));
+         break;
+      }
+   }
 }
 
 /**************************************************
@@ -146,7 +149,7 @@ void Board::clear()
  * BOARD :: MOVE
  * Apply a move to the board
  **************************************************/
-void Board::move(const Move& move)
+void Board::move(const Move &move)
 {
    Position src = move.getSrc();
    Position dest = move.getDest();
@@ -162,18 +165,15 @@ void Board::move(const Move& move)
    if (move.getEnPassant())
    {
       Position sides[2]{
-         src + Delta{ -1, 0 },
-         src + Delta{  1, 0 }
-      };
+          src + Delta{-1, 0},
+          src + Delta{1, 0}};
       bool didEnpassant = false;
-      for (const Position& side : sides)
+      for (const Position &side : sides)
       {
          if (side.isValid())
          {
-            const Piece& piece = get(side);
-            if (piece == 'p' 
-               && piece.justMoved(*this)
-               && piece.isWhite() != move.isWhiteMove())
+            const Piece &piece = get(side);
+            if (piece == 'p' && piece.justMoved(*this) && piece.isWhite() != move.isWhiteMove())
             {
                board[side.getLocation()] = make_unique<Space>(Space());
                didEnpassant = true;
@@ -195,8 +195,8 @@ void Board::move(const Move& move)
    // Check king-side castle
    if (move.getCastleK())
    {
-      Position corner = src + Delta{ 3, 0 };
-      Position castlePosition = src + Delta{ 1, 0 };
+      Position corner = src + Delta{3, 0};
+      Position castlePosition = src + Delta{1, 0};
       if (!corner.isValid() || get(corner) != 'r')
          throw "Cannot castle, rook is in wrong position";
 
@@ -206,8 +206,8 @@ void Board::move(const Move& move)
    // Check queen-side castle
    if (move.getCastleQ())
    {
-      Position corner = src + Delta{ -4, 0 };
-      Position castlePosition = src + Delta{ -1, 0 };
+      Position corner = src + Delta{-4, 0};
+      Position castlePosition = src + Delta{-1, 0};
       if (!corner.isValid() || get(corner) != 'r')
          throw "Cannot castle, rook is in wrong position";
 
@@ -234,7 +234,7 @@ void Board::moveTo(Position src, Position dest)
  * Draw the board and pieces, as well as click and hover positions
  * if the game is ongoing
  **************************************************/
-void Board::draw(Interface* pUI, Winner winner) const
+void Board::draw(Interface *pUI, Winner winner) const
 {
    ogstream gout;
 
@@ -259,6 +259,96 @@ void Board::draw(Interface* pUI, Winner winner) const
       gout << (winner == BLACK ? "Black Wins!" : "White Wins!");
    }
 
-   for (auto& piece : board)
+   for (auto &piece : board)
       piece->draw(gout);
+}
+
+/**************************************************
+ * BOARD :: SAVE
+ * Save the board to a json file
+ **************************************************/
+
+void Board::save(const Board &board)
+{
+   json j;
+   j["board"] = board.getBoardState();
+   ofstream file("boardState.json");
+   file << j;
+}
+
+/**************************************************
+ * BOARD :: LOAD
+ * Load the board from a json file
+ **************************************************/
+
+void Board::load(Board &board)
+{
+   ifstream file("boardState.json");
+   json j;
+   file >> j;
+   board.setBoardState(j["board"]);
+}
+
+/**************************************************
+ * BOARD :: GET BOARD STATE
+ * Get the board state
+ **************************************************/
+
+json Board::getBoardState() const
+{
+   json j = json::array();
+   for (const auto &piece : board)
+   {
+      json piece_json;
+      piece_json["type"] = typeid(*piece).name();    // the type of the piece
+      piece_json["position"] = piece->getPosition(); // assuming each piece has getPosition method
+      piece_json["isWhite"] = piece->isWhite();      // assuming each piece has isWhite method
+      j.push_back(piece_json);
+   }
+   return j;
+}
+
+/**************************************************
+ * BOARD :: SET BOARD STATE
+ * Set the board state
+ **************************************************/
+
+void Board::setBoardState(const json &j)
+{
+   assert(j.is_array() && j.size() == 64);
+   for (int i = 0; i < 64; i++)
+   {
+      string type = j[i]["type"];
+      Position pos = j[i]["position"];
+      bool isWhite = j[i]["isWhite"];
+
+      if (type == typeid(Pawn).name())
+      {
+         board[i] = make_unique<Pawn>(Pawn(pos, isWhite));
+      }
+      else if (type == typeid(Rook).name())
+      {
+         board[i] = make_unique<Rook>(Rook(pos, isWhite));
+      }
+      else if (type == typeid(Knight).name())
+      {
+         board[i] = make_unique<Knight>(Knight(pos, isWhite));
+      }
+      else if (type == typeid(Bishop).name())
+      {
+         board[i] = make_unique<Bishop>(Bishop(pos, isWhite));
+      }
+      else if (type == typeid(Queen).name())
+      {
+         board[i] = make_unique<Queen>(Queen(pos, isWhite));
+      }
+      else if (type == typeid(King).name())
+      {
+         board[i] = make_unique<King>(King(pos, isWhite));
+      }
+      else
+      {
+         board[i] = make_unique<Space>(Space(pos, isWhite));
+      }
+   }
 }
