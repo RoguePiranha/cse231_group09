@@ -1,4 +1,5 @@
-﻿  board.cpp
+﻿  bishop.cpp
+  board.cpp
   chess.cpp
 C:\Users\offic\Documents\GitHub\cse231_group09\Chess\TestBoard.h(78,16): warning C4834: discarding return value of function with 'nodiscard' attribute
 C:\Users\offic\Documents\GitHub\cse231_group09\Chess\TestBoard.h(83,16): warning C4834: discarding return value of function with 'nodiscard' attribute
@@ -7,6 +8,12 @@ C:\Users\offic\Documents\GitHub\cse231_group09\Chess\TestBoard.h(93,16): warning
 C:\Users\offic\Documents\GitHub\cse231_group09\Chess\TestBoard.h(98,16): warning C4834: discarding return value of function with 'nodiscard' attribute
 C:\Users\offic\Documents\GitHub\cse231_group09\Chess\TestBoard.h(103,16): warning C4834: discarding return value of function with 'nodiscard' attribute
 C:\Users\offic\Documents\GitHub\cse231_group09\Chess\TestBoard.h(108,16): warning C4834: discarding return value of function with 'nodiscard' attribute
+  game.cpp
+  knight.cpp
+  pawn.cpp
+  piece.cpp
+  King.cpp
+  queen.cpp
   rook.cpp
   Generating Code...
   Lab01.vcxproj -> C:\Users\offic\Documents\GitHub\cse231_group09\Chess\x64\Debug\Lab01.exe

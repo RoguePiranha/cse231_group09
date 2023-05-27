@@ -8,9 +8,9 @@
 
 enum Winner
 {
-   WHITE,
-   BLACK,
-   NONE
+    WHITE,
+    BLACK,
+    NONE
 };
 
 /**************************************************
@@ -20,17 +20,17 @@ enum Winner
 class Game
 {
 public:
-   Game()
-   {
-      whiteTurn = true;
-      board.reset();
-      winner = NONE;
-   }
-   void advance(Interface* pUI);
-   void draw(Interface* pUI);
+    Game()
+    {
+        whiteTurn = true;
+        board.reset();
+        winner = NONE;
+    }
+    void advance(Interface* pUI);
+    void draw(Interface* pUI);
 
 private:
-   bool whiteTurn;
-   Board board;
-   Winner winner;
+    bool whiteTurn;
+    Board board;
+    Winner winner;
 };

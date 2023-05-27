@@ -32,9 +32,9 @@ using namespace std;
  **************************************/
 void callBack(Interface* pUI, void* p)
 {
-   Game* game = (Game*)p;
-   game->advance(pUI);
-   game->draw(pUI);
+    Game* game = (Game*)p;
+    game->advance(pUI);
+    game->draw(pUI);
 }
 
 /*********************************
@@ -45,48 +45,48 @@ void callBack(Interface* pUI, void* p)
 #ifdef _WIN32
 #include <windows.h>
 int WINAPI WinMain(
-   _In_ HINSTANCE hInstance,
-   _In_opt_ HINSTANCE hPrevInstance,
-   _In_ PSTR pCmdLine,
-   _In_ int nCmdShow)
+    _In_ HINSTANCE hInstance,
+    _In_opt_ HINSTANCE hPrevInstance,
+    _In_ PSTR pCmdLine,
+    _In_ int nCmdShow)
 #else // !_WIN32
 int main(int argc, char** argv)
 #endif // !_WIN32
 {
-   Interface ui("Chess");
+    Interface ui("Chess");
 
 #ifdef _WIN32
-   //  int    argc;
-   //  LPWSTR * argv = CommandLineToArgvW(GetCommandLineW(), &argc);
-   //  string filename = argv[1];
-   //if (__argc == 2)
-      //readFile(__argv[1], board);
+    //  int    argc;
+    //  LPWSTR * argv = CommandLineToArgvW(GetCommandLineW(), &argc);
+    //  string filename = argv[1];
+    //if (__argc == 2)
+       //readFile(__argv[1], board);
 #else // !_WIN32
-   //if (argc == 2)
-      //readFile(argv[1], board);
+    //if (argc == 2)
+       //readFile(argv[1], board);
 #endif // !_WIN32
 
 #ifdef DEBUG
-   TestKing testKing;
-   testKing.run();
-   TestQueen testQueen;
-   testQueen.run();
-   TestBishop testBishop;
-   testBishop.run();
-   TestKnight testKnight;
-   testKnight.run();
-   TestRook testRook;
-   testRook.run();
-   TestPawn testPawn;
-   testPawn.run();
-   TestBoard testBoard;
-   testBoard.Run();
+    TestKing testKing;
+    testKing.run();
+    TestQueen testQueen;
+    testQueen.run();
+    TestBishop testBishop;
+    testBishop.run();
+    TestKnight testKnight;
+    testKnight.run();
+    TestRook testRook;
+    testRook.run();
+    TestPawn testPawn;
+    testPawn.run();
+    TestBoard testBoard;
+    testBoard.Run();
 
 #endif
 
-   Game game;
+    Game game;
 
-   ui.run(callBack, &game);
+    ui.run(callBack, &game);
 
-   return 0;
+    return 0;
 }
